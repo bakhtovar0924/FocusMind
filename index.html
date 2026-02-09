@@ -1,0 +1,162 @@
+<!-- /*
+*@LICENSE
+*FocusMind v1.0.0
+*Copyright (c) 2026 Bakhtovar Usmonov All rights reserved.
+*Unauthorized copying of this file, via any medium is strictly prohibited.
+*/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="FocusMind - быстрый и минималистичный инструмент для глубокой работы. Альтернатива Nation">
+    <title>FocusMind OS - пространство для фокуса</title>
+    <link rel="stylesheet" href="assets/style/app.css">
+    <script defer src="assets/js/app.js"></script>
+</head>
+
+<body id="body">
+    <div class="app" id="focusmind">
+        <aside class="sidebar" id="sidebar">
+            <nav aria-label="Быстрые действия">
+                <button class="nav-btn" data-action="new-task">&plus; Новая задача</button>
+                <button class="nav-btn" data-action="open-timer">⏱ Таймер</button>
+                <button class="nav-btn" data-action="export">&DownArrowBar; Экспорт JSON</button>
+                <label class="nav-btn" style="cursor:pointer">
+                    &UpArrowBar; Импорт<input id="importFile" type="file" accept="application/json"
+                        style="display:none">
+                </label>
+            </nav>
+
+            <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <div style="font-weight:600">Локально</div>
+                <div class="hint">Данные хранятся на вашем устройстве. Без облака, без отслеживания.</div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="btn" id="clearStorage">Сброс</button>
+                    <button class="btn" id="openData">Открыть JSON</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="app-header" id="appHeader" data-block="appHeader">
+                <div>
+                    <div class="title">
+                        <p>Рабочий хаб — FocusMind</p>
+                    </div>
+                </div>
+                <div class="settings">
+                    <button class="btn" id="settings">Настройки</button>
+                </div>
+                <div>
+                    <button class="btn none" id="resetStyleBtn">Сбросить все стили</button>
+                </div>
+            </header>
+            <div class="grid">
+                <section>
+                    <div class="card" data-block="tasks">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                            <div style="font-weight:700">Задачи</div>
+                            <div class="hint">Организуйте день!</div>
+                        </div>
+
+                        <div class="task-input">
+                            <input id="taskText" type="text"
+                                placeholder="Добавить задачу, например 'Глубокая работа: 90м'">
+                            <button class="btn primary" id="addTaskBtn">Добавить</button>
+                        </div>
+
+                        <div id="tasksList" aria-live="polite"></div>
+
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+                            <small class="muted">Совет: экспортируйте для резервной копии или редактируйте JSON
+                                напрямую.</small>
+                            <div class="footer-bar">
+                                <button class="btn" id="exportBtn">Экспорт</button>
+                            </div>
+                        </div>
+                        <details class="block-settings" id="blockSettings" data-setting-id="2" style="margin-top:12px">
+                            <summary>Настройки блока</summary>
+                            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                    <input id="tasks-bg" type="color">
+                                </label>
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                    <input id="tasks-text" type="color">
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="card" style="margin-top:16px" data-block="notes">
+                        <div style="font-weight:700;margin-bottom:8px">Заметки</div>
+                        <textarea id="notes" rows="4" style="width:100%;resize:vertical"
+                            placeholder="Личные заметки, хранятся локально"></textarea>
+                        <details class="block-settings" id="blockSettings" data-setting-id="3" style="margin-top:12px">
+                            <summary>Настройки блока</summary>
+                            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                    <input id="notes-bg" type="color">
+                                </label>
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                    <input id="notes-text" type="color">
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <aside>
+                    <div class="card timer" data-block="timer">
+                        <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
+                            <div style="font-weight:700">Помодоро</div>
+                            <div class="hint">Интервалы продуктивности</div>
+                        </div>
+
+                        <div style="margin-top:8px" class="time-display" id="time">25:00</div>
+
+                        <div style="display:flex;gap:8px;margin-top:8px">
+                            <input id="minutes" type="number" value="25" min="1">
+                            <button class="btn primary" id="startTimer">Запустить</button>
+                            <button class="btn" id="pauseTimer">Пауза</button>
+                            <button class="btn" id="resetTimer">Сброс</button>
+                        </div>
+
+                        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                            <button class="btn" id="quick25">25м</button>
+                            <button class="btn" id="quick50">50м</button>
+                            <button class="btn" id="quick15">15м</button>
+                        </div>
+                        <details class="block-settings" id="blockSettings" data-setting-id="4" style="margin-top:12px">
+                            <summary>Настройки блока</summary>
+                            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                    <input id="timer-bg" type="color">
+                                </label>
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                    <input id="timer-text" type="color">
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <p> &copy; 2026 FocusMind OS. Все права защищены. </p>
+        <p>Bakhtovar Usmonov</p>
+    </footer>
+</body>
+
+</html>
+
+<!-- /*
+*@LICENSE
+*FocusMind v1.0.0
+*Copyright (c) 2026 Bakhtovar Usmonov All rights reserved.
+*Unauthorized copying of this file, via any medium is strictly prohibited.
+*/ -->

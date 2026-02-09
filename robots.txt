@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bakhtovar0924.github.io/FocusMind/
