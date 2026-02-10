@@ -75,7 +75,7 @@ document.querySelectorAll('[data-action]').forEach(btn => {
     btn.addEventListener('click', () => {
         const a = btn.getAttribute('data-action');
         if (a === 'new-task') $('taskText').focus();
-        if (a === 'open-timer') window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (a === 'open-timer') $('startTimer').focus();
     });
 });
 
