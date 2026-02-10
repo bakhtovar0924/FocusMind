@@ -112,7 +112,10 @@ function createDivBrand() {
     divBrand.classList.add("brand");
     const divLogo = document.createElement("div");
     divLogo.classList.add("logo");
-    divLogo.innerText = "FM";
+    const icon = document.createElement("img");
+    icon.src = "favocio.png";
+    icon.classList.add("logo");
+    divLogo.append(icon);
     const div = document.createElement("div");
     const divFMOS = document.createElement("div");
     divFMOS.style.fontWeight = "700";

@@ -32,7 +32,7 @@ body {
     padding: 32px
 }
 
-a{
+a {
     color: #e6eef8;
 }
 
@@ -64,12 +64,9 @@ a{
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent0), var(--accent1));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    color: #051025
 }
 
 .sidebar {
