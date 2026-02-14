@@ -26,19 +26,23 @@
     <meta name="keywords"
         content="планировщик, pomodoro, заметки, таджикистан, focusmind, private page, my private page, my private site, мой приватный сайт, сайт 2026 года, сайт 2026">
     <link rel="stylesheet" href="assets/style/app.css">
-    <link rel="icon" href="./favocio.png">
+    <link rel="icon" loading="lazy" href="./favocio.png">
     <script defer src="assets/js/app.js"></script>
 </head>
 
 <body id="body">
+    <div id="preloader">
+        <div class="loader"></div>
+        <div class="loader-text">Загрузка: <span id="progress-count">0%</span></div>
+    </div>
     <div class="app" id="focusmind">
         <aside class="sidebar" id="sidebar">
             <nav aria-label="Быстрые действия">
                 <button class="nav-btn" data-action="new-task">&plus; Новая задача</button>
-                <button class="nav-btn" data-action="open-timer">⏱ Таймер</button>
+                <button class="nav-btn" data-action="timer">⏱ Таймер</button>
                 <button class="nav-btn" data-action="export">&DownArrowBar; Экспорт JSON</button>
                 <label class="nav-btn" style="cursor:pointer">
-                    &UpArrowBar; Импорт<input id="importFile" type="file" accept="application/json"
+                    &UpArrowBar; Импорт JSON<input id="importFile" type="file" accept="application/json"
                         style="display:none">
                 </label>
             </nav>
@@ -47,7 +51,7 @@
                 <div style="font-weight:600">Локально</div>
                 <div class="hint">Данные хранятся на вашем устройстве. Без облака, без отслеживания.</div>
                 <div style="display:flex;gap:8px;margin-top:8px">
-                    <button class="btn" id="clearStorage">Сброс</button>
+                    <button class="btn" id="clearStorage">Сбросить JSON</button>
                     <button class="btn" id="openData">Открыть JSON</button>
                 </div>
             </div>
@@ -61,7 +65,7 @@
                     </div>
                 </div>
                 <div class="settings">
-                    <button class="btn" id="settings">Настройки</button>
+                    <button class="btn" id="settings">Настройки интерфейса</button>
                 </div>
                 <div>
                     <button class="btn none" id="resetStyleBtn">Сбросить все стили</button>
@@ -93,10 +97,12 @@
                         <details class="block-settings" id="blockSettings" data-setting-id="2" style="margin-top:12px">
                             <summary>Настройки блока</summary>
                             <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет фона
                                     <input id="tasks-bg" type="color">
                                 </label>
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет текст
                                     <input id="tasks-text" type="color">
                                 </label>
                             </div>
@@ -110,10 +116,12 @@
                         <details class="block-settings" id="blockSettings" data-setting-id="3" style="margin-top:12px">
                             <summary>Настройки блока</summary>
                             <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет фона
                                     <input id="notes-bg" type="color">
                                 </label>
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет текст
                                     <input id="notes-text" type="color">
                                 </label>
                             </div>
@@ -145,10 +153,12 @@
                         <details class="block-settings" id="blockSettings" data-setting-id="4" style="margin-top:12px">
                             <summary>Настройки блока</summary>
                             <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Фон
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет фона
                                     <input id="timer-bg" type="color">
                                 </label>
-                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">Текст
+                                <label style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+                                    Цвет текст
                                     <input id="timer-text" type="color">
                                 </label>
                             </div>

@@ -113,6 +113,7 @@ function createDivBrand() {
     const divLogo = document.createElement("div");
     divLogo.classList.add("logo");
     const icon = document.createElement("img");
+    icon.loading = "lazy";
     icon.src = "favocio.png";
     icon.classList.add("logo");
     divLogo.append(icon);
@@ -130,34 +131,6 @@ function createDivBrand() {
 }
 
 createDivBrand();
-
-function settingsBodyColor() {
-    const aside = document.createElement("aside");
-    const input = document.createElement("input");
-    input.type = "color";
-    aside.innerText = "Свет фона";
-    input.addEventListener("input", () => {
-        $("body").style.background = input.value
-    })
-    aside.append(input);
-    return aside
-}
-
-function settingsAllTextColor() {
-    const aside = document.createElement("aside");
-    const style = document.createElement("style");
-    const input = document.createElement("input");
-    input.type = "color";
-    aside.innerText = "Свет текста(все)";
-    input.addEventListener("input", () => {
-        style.innerHTML = `*{
-            color: ${input.value};
-        }`
-    });
-    aside.append(input);
-    $("body").append(style);
-    return aside
-}
 
 async function colorsData() {
     try {
@@ -183,12 +156,8 @@ function applySettingToDOM(s) {
     try {
         if (s.bg) sel.style.background = s.bg;
         if (s.text) sel.style.color = s.text;
-        sel.classList.remove('row-1', 'row-2', 'row-3');
-        const layoutClass = (s.layout || '1-row').replace('-rows', '').replace('-row', '');
-        sel.classList.add(`row-${layoutClass}`);
         const bgInput = document.getElementById(`${s.block}-bg`);
         const textInput = document.getElementById(`${s.block}-text`);
-        const layoutSelect = document.getElementById(`${s.block}-layout`);
         if (bgInput && s.bg) bgInput.value = s.bg;
         if (textInput && s.text) textInput.value = s.text;
         if (layoutSelect && s.layout) layoutSelect.value = s.layout;
@@ -339,6 +308,30 @@ if (resetBtn) {
         }
     });
 }
+
+let loadedCount = 0;
+const totalResources = document.images.length + document.querySelectorAll('audio').length;
+
+function updateProgress() {
+    loadedCount++;
+    const progress = Math.round((loadedCount / totalResources) * 100);
+    document.getElementById('progress-count').textContent = progress + '%';
+
+    if (loadedCount >= totalResources) {
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('hidden');
+        }, 500);
+    }
+}
+
+document.querySelectorAll('img').forEach(img => {
+    if (img.complete) {
+        updateProgress();
+    } else {
+        img.addEventListener('load', updateProgress);
+        img.addEventListener('error', updateProgress);
+    }
+});
 
 /*
 *@LICENSE
