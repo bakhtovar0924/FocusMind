@@ -140,7 +140,7 @@ createDivBrand();
 
 async function colorsData() {
     try {
-        let response = await fetch("http://localhost:3333/root", {
+        let response = await fetch("../data.json", {
             method: "GET",
             headers: {
                 "Accept": "application/json"
