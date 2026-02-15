@@ -20,13 +20,17 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusMind: Pomodoro таймер, список задач и заметки онлайн бесплатно</title>
     <meta name="description"
-        content="FocusMind - бесплатный инструмент для продуктивности, таймер, Pomodoro, задачи, работает оффлайн и быстро">
-    <title>FocusMind - пространство для фокуса, планировщик и Pomodoro</title>
-    <meta name="keywords"
-        content="планировщик, pomodoro, заметки, таджикистан, focusmind, private page, my private page, my private site, мой приватный сайт, сайт 2026 года, сайт 2026">
+        content="FocusMind — бесплатный онлайн-инструмент для продуктивности. Удобный планировщик задач, таймер Pomodoro, заметки. Работает без интернета и регистрации.">
+    <meta name="keywords" content="помидор таймер, pomodoro, задачи онлайн, заметки, продуктивность, таймер времени">
+    <meta name="author" content="Bakhtovar Usmonov">
+    <meta property="og:title" content="FocusMind - Pomodoro и задачи">
+    <meta property="og:description" content="Бесплатный инструмент для продуктивности. Таймер, задачи, заметки.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bakhtovar0924.github.io/FocusMind/">
+    <link rel="icon" type="image/png" href="favicio.png">
     <link rel="stylesheet" href="assets/style/app.css">
-    <link rel="icon" loading="lazy" href="./favocio.png">
     <script defer src="assets/js/app.js"></script>
 </head>
 
@@ -49,7 +53,9 @@
 
             <div class="card" style="display:flex;flex-direction:column;gap:8px">
                 <div style="font-weight:600">Локально</div>
-                <div class="hint">Данные хранятся на вашем устройстве. Без облака, без отслеживания.</div>
+                <div class="hint">
+                    <h1 style="font-size: 12px;">Данные хранятся на вашем устройстве. Без облака, без отслеживания.</h1>
+                </div>
                 <div style="display:flex;gap:8px;margin-top:8px">
                     <button class="btn" id="clearStorage">Сбросить JSON</button>
                     <button class="btn" id="openData">Открыть JSON</button>
@@ -61,7 +67,7 @@
             <header class="app-header" id="appHeader" data-block="appHeader">
                 <div>
                     <div class="title">
-                        <p>Рабочий хаб — FocusMind</p>
+                        <h3>Рабочий хаб — FocusMind</h3>
                     </div>
                 </div>
                 <div class="settings">
@@ -73,10 +79,12 @@
             </header>
             <div class="grid">
                 <section>
-                    <div class="card" data-block="tasks">
+                    <div class="card" data-block="tasks" id="tasks">
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
                             <div style="font-weight:700">Задачи</div>
-                            <div class="hint">Организуйте день!</div>
+                            <div class="hint">
+                                <h2 style="font-size: 12px;">Управляйте задачами</h2>
+                            </div>
                         </div>
 
                         <div class="task-input">
@@ -130,10 +138,12 @@
                 </section>
 
                 <aside>
-                    <div class="card timer" data-block="timer">
+                    <div class="card timer" data-block="timer" id="timer">
                         <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
                             <div style="font-weight:700">Помодоро</div>
-                            <div class="hint">Интервалы продуктивности</div>
+                            <div class="hint">
+                                <h2 style="font-size: 12px;">Таймер Pomodoro для фокуса</h2>
+                            </div>
                         </div>
 
                         <div style="margin-top:8px" class="time-display" id="time">25:00</div>
