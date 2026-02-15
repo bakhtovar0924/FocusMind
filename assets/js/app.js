@@ -114,7 +114,7 @@ function createDivBrand() {
     divLogo.classList.add("logo");
     const icon = document.createElement("img");
     icon.loading = "lazy";
-    icon.src = "favocio.png";
+    icon.src = "favicio.png";
     icon.classList.add("logo");
     divLogo.append(icon);
     const div = document.createElement("div");
