@@ -11,6 +11,14 @@ function jsonServerData() {
     return JSON.parse(localStorage.getItem(stateKey) || 'null') || defaultState;
 }
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW error', err));
+    });
+}
+
 const save = () => localStorage.setItem(stateKey, JSON.stringify(state));
 const $ = (id) => document.getElementById(id);
 

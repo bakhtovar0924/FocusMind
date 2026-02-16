@@ -1,0 +1,21 @@
+{
+    "name": "FocusMind",
+    "short_name": "FocusMind",
+    "description": "Умный Pomodoro + задачи + заметки без регистрации",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4f46e5",
+    "icons": [
+        {
+            "src": "favicio.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "favicio.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
