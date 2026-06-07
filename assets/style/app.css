@@ -2,384 +2,614 @@
 *@LICENSE
 *FocusMind v1.0.0
 *Copyright (c) 2026 Bakhtovar Usmonov All rights reserved.
-*Unauthorized copying of this file, via any medium is strictly prohibited.
 */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-display: swap;
 }
 
 :root {
-    --bg: #0f1724;
-    --card: #0b1220cc;
-    --accent0: #d9ff00;
-    --accent1: #35fc92;
-    --muted: rgba(255, 255, 255, 0.65);
-    --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    --radius: 14px;
-}
-
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color, #0b1220);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-#preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader {
-    width: 50px;
-    height: 50px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #4a90e2;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 20px;
-}
-
-.loader-text {
-    color: #fff;
-    font-size: 16px;
-    opacity: 0.8;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    --bg-main: #1a1b1e;
+    --bg-sidebar: #141517;
+    --bg-card: #1e1f22;
+    --bg-hover: #2a2b2f;
+    --bg-input: #141517;
+    --border: #3f4147;
+    --text-primary: #ffffff;
+    --text-secondary: #c9cbd1;
+    --text-muted: #a0a2a8;
+    --accent: #5a7fc9;
+    --accent-hover: #6e8fd4;
+    --danger: #e06c5e;
+    --success: #56b06b;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --transition: all 0.15s ease;
 }
 
 body {
-    margin: 0;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: radial-gradient(1000px 400px at 10% 10%, rgba(124, 92, 255, 0.08), transparent), var(--bg);
-    background-repeat: no-repeat;
-    color: #e6eef8;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding: 32px
 }
 
-a {
-    color: #e6eef8;
-}
-
+/* Layout */
 .app {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
+    padding: 20px;
     display: grid;
     grid-template-columns: 260px 1fr;
-    gap: 24px;
+    gap: 20px;
     align-items: start;
 }
 
-.close {
-    display: none;
+/* Sidebar */
+#sidebar {
+    background: var(--bg-sidebar);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid var(--border);
 }
 
 .brand {
     display: flex;
-    gap: 12px;
     align-items: center;
-    padding: 16px;
-    border-radius: 12px;
-    background: var(--glass);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 30%)
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
 }
 
 .logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: contain;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 16px
+.brand h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
 }
 
 nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--card);
-    border: 1px solid rgba(255, 255, 255, 30%)
+    gap: 6px;
 }
 
 .nav-btn {
-    display: flex;
-    align-items: center;
-    background: radial-gradient(#000000, #0064ff4a);
-    gap: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    color: var(--muted);
-    text-decoration: none;
-    cursor: pointer
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    font-family: inherit;
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.02);
-    color: #fff
+    background: var(--bg-hover);
+    color: var(--text-primary);
 }
 
-.main {
-    display: flex;
-    flex-direction: column;
-    gap: 16px
+/* Cards */
+.card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 16px;
+    transition: var(--transition);
 }
 
-header.app-header {
+.card:hover {
+    border-color: var(--accent);
+}
+
+/* Main header */
+.app-header {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--card);
-    border: 1px solid rgba(255, 255, 255, 30%)
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 0;
 }
 
-.title {
+.title h2 {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: var(--text-primary);
 }
 
-.subtitle {
-    font-size: 13px;
-    color: var(--muted)
-}
-
+/* Grid */
 .grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 16px
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    margin-top: 0;
 }
 
-.grid {
-    grid-auto-rows: minmax(120px, auto);
-}
-
-.block-settings summary {
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--muted);
-    padding: 6px 8px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-.block-settings {
-    margin-top: 8px;
-    display: none;
-}
-
-.card {
-    padding: 16px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 30%)
-}
-
-.timer {
+/* Tasks */
+.task-input {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.task-input input {
+    flex: 1;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.task-input input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.task-row {
+    display: flex;
     align-items: center;
-    text-align: center
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.task-row:last-child {
+    border-bottom: none;
+}
+
+.task-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.task-title {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.task-actions .btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.task-actions .btn:hover {
+    color: var(--danger);
+    background: var(--bg-hover);
+}
+
+/* Timer */
+.timer {
+    text-align: center;
 }
 
 .time-display {
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: 1px
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: monospace;
+    margin: 16px 0;
+    color: var(--text-primary);
 }
 
 .timer-controls {
     display: flex;
-    gap: 8px
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
+/* Timer input with hidden label */
+.timer-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Buttons */
 .btn {
-    padding: 8px 12px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
     cursor: pointer;
-    color: var(--muted)
+    font-size: 13px;
+    font-weight: 500;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+    color: var(--text-primary);
 }
 
 .btn.primary {
-    background: linear-gradient(90deg, var(--accent0), var(--accent1));
-    color: #051025;
-    border: none;
-    font-weight: 600;
+    background: #3b6ea0;
+    border-color: #3b6ea0;
+    color: #ffffff;
+    font-weight: 500;
 }
 
-/* Tasks */
-.task-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 8px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.01);
-    margin-bottom: 8px
+.btn.primary:hover {
+    background: #2d5a86;
+    border-color: #2d5a86;
 }
 
-.task-title {
-    flex: 1
-}
-
-.task-actions {
-    display: flex;
-    gap: 8px
-}
-
-.task-input {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px
-}
-
+/* Inputs */
 input[type="text"],
 input[type="number"],
 textarea {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    padding: 8px;
-    border-radius: 8px;
-    color: inherit;
-    outline: none
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: var(--transition);
 }
 
-small.muted {
-    color: var(--muted)
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
 }
 
-.footer-bar {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end
+#minutes {
+    width: 80px;
+    text-align: center;
 }
 
+textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+/* Settings */
+.block-settings {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: none;
+}
+
+.block-settings.open {
+    display: block;
+}
+
+.block-settings summary {
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.block-settings summary:hover {
+    color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+    max-width: 1300px;
+    margin: 40px auto 20px;
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--text-primary);
+}
+
+/* Utility */
 .hint {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--text-secondary);
 }
 
-.settings {
-    display: flex;
-    justify-content: space-around;
-}
-
-.settingsChild {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+.muted {
+    color: var(--text-muted);
 }
 
 .none {
     display: none;
 }
 
-#minutes {
-    width: 84px;
-    text-align: center;
+/* Headings hierarchy */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
 }
 
-.footer {
+/* Toast уведомление */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2b2d31;
+    border: 1px solid #3f4147;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: #e2e4e8;
+    font-size: 14px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* Modal подтверждения */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    border: 1px solid white;
-    padding: 10px;
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: #1e1f22;
+    border: 1px solid #3f4147;
+    border-radius: 12px;
+    padding: 24px;
+    min-width: 280px;
+    max-width: 400px;
     text-align: center;
-    border-radius: 20px;
-    max-width: 1100px;
-    margin: 20px auto;
-    gap: 24px;
+}
+
+.modal p {
+    margin-bottom: 20px;
+    color: #e2e4e8;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-buttons button {
+    padding: 8px 20px;
+}
+
+/* Заметки — стили для отображения форматирования */
+.note-preview {
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.note-preview:hover {
+    background: var(--bg-hover);
+}
+
+.note-preview-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.note-preview-excerpt {
+    font-size: 12px;
+    color: var(--text-muted);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Форматирование текста в заметке */
+.markdown-simple {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.markdown-simple strong {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.markdown-simple em {
+    font-style: italic;
+}
+
+.markdown-simple ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.markdown-simple li {
+    margin: 4px 0;
+}
+
+/* Активная заметка */
+.note-preview.active {
+    background: var(--accent);
+    color: white;
+}
+
+.note-preview.active .note-preview-excerpt {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Кнопка удаления заметки */
+.delete-note-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--danger);
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.delete-note-btn:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: white;
+}
+
+/* Фиксируем размеры до загрузки контента */
+#tasksList {
+    min-height: 50px;
+}
+
+.card.timer {
+    min-height: 280px;
+}
+
+.card[data-block="tasks"] {
+    min-height: 240px;
+}
+
+.brand {
+    min-height: 60px;
+}
+
+/* Кнопки таймера с иконками */
+#playPauseBtn {
+    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
 }
 
-@media (max-width:920px) {
+#resetTimer {
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-control-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
     .app {
-        grid-template-columns: none;
+        grid-template-columns: 1fr;
+        padding: 12px;
     }
 
     .grid {
-        grid-template-columns: none
+        grid-template-columns: 1fr;
+    }
+
+    .time-display {
+        font-size: 40px;
     }
 }
 
-@media (max-width:500px) {
-    body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        background: radial-gradient(1000px 400px at 10% 10%, rgba(124, 92, 255, 0.08), transparent), var(--bg);
-        background-repeat: no-repeat;
-        color: #e6eef8;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    .btn {
-        padding: 7px 5px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.02);
-        cursor: pointer;
-        color: var(--muted);
-    }
-
-    .app {
-        grid-template-columns: none;
-    }
-
-    .grid {
-        grid-template-columns: none
-    }
-
-    #minutes {
-        width: 60px;
+@media (max-width: 500px) {
+    .app-header {
+        flex-direction: column;
         text-align: center;
     }
 
-}
+    .task-input {
+        flex-direction: column;
+    }
 
-/*
-*@LICENSE
-*FocusMind v1.0.0
-*Copyright (c) 2026 Bakhtovar Usmonov All rights reserved.
-*Unauthorized copying of this file, via any medium is strictly prohibited.
-*/
+    .timer-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
